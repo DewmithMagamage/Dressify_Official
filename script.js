@@ -28,9 +28,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mobile Menu Toggle (Only run if elements exist)
     const mobileMenu = document.querySelector(".mobile-menu");
     const navLinks = document.querySelector(".nav-links");
+    const menuItems = document.querySelectorAll(".nav-links a"); // Select all menu links
+
     if (mobileMenu && navLinks) {
+        // Toggle menu on hamburger click
         mobileMenu.addEventListener("click", () => {
             navLinks.classList.toggle("active");
+        });
+
+        // Close menu when a link is clicked
+        menuItems.forEach(item => {
+            item.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+            });
         });
     }
 
