@@ -1,3 +1,35 @@
+let currentIndex = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function changeSlide(index) {
+    slides[currentIndex].classList.remove("active");
+    dots[currentIndex].classList.remove("active");
+
+    currentIndex = index;
+
+    slides[currentIndex].classList.add("active");
+    dots[currentIndex].classList.add("active");
+}
+
+// Auto change every 4 seconds
+function autoChangeSlide() {
+    let nextIndex = (currentIndex + 1) % slides.length;
+    changeSlide(nextIndex);
+}
+
+let slideInterval = setInterval(autoChangeSlide, 6000);
+
+// Click event for dots
+dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+        changeSlide(index);
+        clearInterval(slideInterval); // Reset auto-change when user interacts
+        slideInterval = setInterval(autoChangeSlide, 4000);
+    });
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
     // Pop-up window functions
     function openPopup() {
@@ -7,6 +39,38 @@ document.addEventListener("DOMContentLoaded", function () {
     function closePopup() {
         document.getElementById("popup").classList.remove("active");
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Smooth scrolling for navigation links
+    document.querySelectorAll("a[href^='#']").forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetSection = document.querySelector(this.getAttribute("href"));
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 50,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Scroll fade-in effect
+    const sections = document.querySelectorAll(".about-section, .features, .hero");
+
+    function revealOnScroll() {
+        const screenPosition = window.innerHeight / 1.2;
+        sections.forEach(section => {
+            if (section.getBoundingClientRect().top < screenPosition) {
+                section.classList.add("visible");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll(); // Initial check on page load
+});
+
 
     // Ensure pop-up buttons are working
     const openPopupBtn = document.getElementById("open-popup");
@@ -77,7 +141,27 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("seconds").innerText = seconds.toString().padStart(2, "0");
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        const aboutSection = document.querySelector(".about-section");
+    
+        window.addEventListener("scroll", function () {
+            const sectionPosition = aboutSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+    
+            if (sectionPosition < screenPosition) {
+                aboutSection.classList.add("visible");
+            }
+        });
+    });
+    
+
     // Call the function every second
     setInterval(updateCountdown, 1000);
     updateCountdown();
 });
+
+function toggleFeature(card) {
+    card.classList.toggle("active");
+}
+
+
