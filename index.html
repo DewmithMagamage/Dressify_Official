@@ -247,7 +247,25 @@
         <a href="https://chat.whatsapp.com/Jj3zxI5uN8NAdO81J9ZGCe" class="button" data-aos="fade-up" data-aos-delay="600">Join the Community</a>
     </section>
 
-
+    <div class="chatbot-widget">
+        <button class="chatbot-toggle-btn" onclick="toggleChat()">
+            <img src="/Images/chatbot.png" alt="Chatbot" class="chatbot-icon">
+        </button>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                💬 Dressify Assistant
+                <button class="chatbot-close" onclick="toggleChat()">✖</button>
+            </div>
+            <div class="chatbot-body" id="chatbot-body">
+                <div class="bot-message">Hi there! How can I assist you today? 😊</div>
+            </div>
+            <div class="chatbot-footer">
+                <input type="text" id="chatbot-input" placeholder="Ask something...">
+                <button onclick="sendChatMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+    
     <footer class="footer">
         <div class="footer-container">
             <div class="social-links">

@@ -165,3 +165,79 @@ function toggleFeature(card) {
 }
 
 
+// Open/Close the chatbot window
+function toggleChat() {
+    const chatWindow = document.getElementById('chatbot-window');
+    
+    if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+        resetChat();
+        chatWindow.style.display = 'flex';
+        document.getElementById('chatbot-input').focus(); // Focus input when opened
+    } else {
+        chatWindow.style.display = 'none';
+    }
+}
+
+// Reset chat messages every time chatbot opens
+function resetChat() {
+    const chatBody = document.getElementById('chatbot-body');
+    chatBody.innerHTML = '<div class="bot-message">Hi there! How can I assist you today? 😊</div>';
+    document.getElementById('chatbot-input').value = '';
+}
+
+// Send message when clicking button or pressing Enter
+function sendChatMessage() {
+    const input = document.getElementById('chatbot-input');
+    const message = input.value.trim();
+
+    if (message === "") return;
+
+    const chatBody = document.getElementById('chatbot-body');
+
+    // Add user message to chat
+    const userMessage = document.createElement('div');
+    userMessage.classList.add('user-message');
+    userMessage.innerText = `You: ${message}`;
+    chatBody.appendChild(userMessage);
+
+    input.value = ''; // Clear input after sending
+
+    chatBody.scrollTop = chatBody.scrollHeight; // Auto-scroll down
+
+    // Simulate bot response
+    setTimeout(() => {
+        const botReply = getBotReply(message);
+        const botMessage = document.createElement('div');
+        botMessage.classList.add('bot-message');
+        botMessage.innerText = `Bot: ${botReply}`;
+        chatBody.appendChild(botMessage);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 800);
+}
+
+// Add support for Enter key to send message
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('chatbot-input');
+    input.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            sendChatMessage();
+        }
+    });
+});
+
+// Simple mock reply logic (you can replace this with API later)
+function getBotReply(userMessage) {
+    const lowerMessage = userMessage.toLowerCase();
+
+    if (lowerMessage.includes("hi") || lowerMessage.includes("hello")) {
+        return "Hello! How can I assist you with Dressify?";
+    } else if (lowerMessage.includes("fit") || lowerMessage.includes("preview")) {
+        return "You can upload your photo and preview garments in Dressify!";
+    } else if (lowerMessage.includes("how") && lowerMessage.includes("work")) {
+        return "It works by matching your uploaded image with the selected garment for a virtual try-on.";
+    } else if (lowerMessage.includes("thank")) {
+        return "You're most welcome! 😊";
+    } else {
+        return "I'm here to help! Ask me anything about Dressify.";
+    }
+}
