@@ -20,7 +20,6 @@ function autoChangeSlide() {
 
 let slideInterval = setInterval(autoChangeSlide, 6000);
 
-// Click event for dots
 dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
         changeSlide(index);
