@@ -165,6 +165,7 @@ function toggleFeature(card) {
 }
 
 
+//chat bot
 // Open/Close the chatbot window
 function toggleChat() {
     const chatWindow = document.getElementById('chatbot-window');
