@@ -12,7 +12,7 @@ function changeSlide(index) {
     dots[currentIndex].classList.add("active");
 }
 
-// Auto change every 4 seconds
+
 function autoChangeSlide() {
     let nextIndex = (currentIndex + 1) % slides.length;
     changeSlide(nextIndex);
@@ -20,11 +20,10 @@ function autoChangeSlide() {
 
 let slideInterval = setInterval(autoChangeSlide, 6000);
 
-// Click event for dots
 dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
         changeSlide(index);
-        clearInterval(slideInterval); // Reset auto-change when user interacts
+        clearInterval(slideInterval); 
         slideInterval = setInterval(autoChangeSlide, 4000);
     });
 });
@@ -118,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Countdown Timer
     function updateCountdown() {
-        const launchDate = new Date("March 17, 2025 00:00:00").getTime(); // Fixed date format
+        const launchDate = new Date("March 17, 2025 00:00:00").getTime(); 
         const now = new Date().getTime();
         const distance = launchDate - now;
 
