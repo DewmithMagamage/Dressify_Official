@@ -23,7 +23,7 @@ let slideInterval = setInterval(autoChangeSlide, 6000);
 dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
         changeSlide(index);
-        clearInterval(slideInterval); // Reset auto-change when user interacts
+        clearInterval(slideInterval); 
         slideInterval = setInterval(autoChangeSlide, 4000);
     });
 });
