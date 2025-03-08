@@ -225,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Simple mock reply logic (you can replace this with API later)
 function getBotReply(userMessage) {
     const lowerMessage = userMessage.toLowerCase();
 
