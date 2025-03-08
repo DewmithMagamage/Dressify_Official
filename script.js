@@ -12,7 +12,7 @@ function changeSlide(index) {
     dots[currentIndex].classList.add("active");
 }
 
-// Auto change every 4 seconds
+
 function autoChangeSlide() {
     let nextIndex = (currentIndex + 1) % slides.length;
     changeSlide(nextIndex);
