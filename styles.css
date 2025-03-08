@@ -266,7 +266,7 @@ font-size: 1.5rem;
     background: #ff3385;
 }
 
-/* Show Popup */
+
 .popup-container.active {
     visibility: visible;
     opacity: 1;
@@ -277,19 +277,19 @@ font-size: 1.5rem;
 }
 
 .video-container {
-    width: 300px;  /* Fixed container width */
-    height: 300px; /* Fixed container height */
-    overflow: hidden; /* Hides overflow */
-    border-radius: 10px; /* Optional */
+    width: 300px;  
+    height: 300px; 
+    overflow: hidden; 
+    border-radius: 10px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto; /* Centers the container itself */
+    margin: 0 auto; 
     position: relative;
 }
 
 .video-container video {
-    width: 500px;  /* Wider than container for cropping */
+    width: 500px;  
     height: auto;  
     object-fit: cover;
 }
