@@ -227,18 +227,116 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Simple mock reply logic (you can replace this with API later)
-function getBotReply(userMessage) {
-    const lowerMessage = userMessage.toLowerCase();
 
-    if (lowerMessage.includes("hi") || lowerMessage.includes("hello")) {
-        return "Hello! How can I assist you with Dressify?";
-    } else if (lowerMessage.includes("fit") || lowerMessage.includes("preview")) {
-        return "You can upload your photo and preview garments in Dressify!";
-    } else if (lowerMessage.includes("how") && lowerMessage.includes("work")) {
-        return "It works by matching your uploaded image with the selected garment for a virtual try-on.";
-    } else if (lowerMessage.includes("thank")) {
-        return "You're most welcome! 😊";
-    } else {
-        return "I'm here to help! Ask me anything about Dressify.";
+function getBotReply(userMessage) {
+    const lowerMessage = userMessage.toLowerCase().trim();
+
+    // Greeting variations
+    if (containsAny(lowerMessage, [
+        "hi", "hello", "hey", "good morning", "good evening", "good afternoon", "what's up", "yo", "hiya", "greetings"
+    ])) {
+        return "Hello there! 👋 Welcome to Dressify. How can I help you today?";
     }
+
+    // How it works - detailed + casual
+    if (containsAny(lowerMessage, [
+        "how does this work", "how does it work", "how dressify works", "what is dressify", 
+        "explain dressify", "how to use", "how can i use", "what is this site", "how to try clothes"
+    ])) {
+        return "Great question! 👗 Dressify works by letting you upload your photo, select any garment, and we’ll show you a preview of how it fits — all virtually! 📸";
+    }
+
+    // Fit & Preview
+    if (containsAny(lowerMessage, [
+        "fit", "fit preview", "preview", "try on", "fitting", "virtual try", "clothes fit", 
+        "how to see fit", "how will it look on me", "try clothes"
+    ])) {
+        return "To see how it fits, upload your photo 📸, pick any garment you like, and Dressify will show you a virtual try-on preview instantly! ✨";
+    }
+
+    // Upload help
+    if (containsAny(lowerMessage, [
+        "upload", "upload photo", "upload image", "choose photo", "how to upload", 
+        "how to add photo", "where to upload", "photo upload button"
+    ])) {
+        return "To upload your photo, go to the 'Preview' section and click on 'Upload Photo'. Simple and quick! 🚀";
+    }
+
+    // Product and garment details
+    if (containsAny(lowerMessage, [
+        "products", "clothes", "garments", "items", "what can i try", "what do you have", 
+        "what are the options", "show clothes", "available clothes", "show me dresses"
+    ])) {
+        return "We have a fantastic collection — from trendy tops to stunning dresses, casual jeans to elegant jackets. Browse and try them all! 👗👖";
+    }
+
+    // Style or outfit recommendations
+    if (containsAny(lowerMessage, [
+        "recommend", "suggest", "help me choose", "style tips", "what should i wear", 
+        "fashion advice", "help with outfit", "outfit ideas", "clothes for me"
+    ])) {
+        return "Happy to help! 😊 Tell me — are you looking for casual, party, or formal wear? I can suggest outfits for any occasion!";
+    }
+
+    // Price and cost queries
+    if (containsAny(lowerMessage, [
+        "price", "how much", "cost", "what’s the price", "is it expensive", "pricing", 
+        "price list", "how much clothes", "price of dress"
+    ])) {
+        return "Every garment shows its price when you select it. Just browse the collection, and you’ll see the prices right there! 💰";
+    }
+
+    // Contact and support
+    if (containsAny(lowerMessage, [
+        "contact", "support", "customer service", "help center", "get help", 
+        "contact dressify", "reach support", "help me"
+    ])) {
+        return "You can contact our friendly support team at support@dressify.com or through our Contact page. We’re here to help! 💬";
+    }
+
+    // Delivery, shipping, order tracking
+    if (containsAny(lowerMessage, [
+        "delivery", "shipping", "how long", "order status", "when will i get", 
+        "order tracking", "track my order", "shipping time"
+    ])) {
+        return "We typically deliver within 3-5 business days. 📦 You can track your order anytime from your Dressify account!";
+    }
+
+    // Returns & refunds
+    if (containsAny(lowerMessage, [
+        "return", "refund", "exchange", "send back", "return policy", 
+        "refund policy", "what if it doesn’t fit", "can i return"
+    ])) {
+        return "No stress! 😌 You can return or exchange any item within 14 days if something doesn’t fit. Check our Return Policy for all the details!";
+    }
+
+    // Payment methods
+    if (containsAny(lowerMessage, [
+        "payment", "pay", "how to pay", "payment methods", "can i pay online", 
+        "credit card", "payment options", "what payments do you accept"
+    ])) {
+        return "We accept major payment methods including credit/debit cards, online banking, and digital wallets like PayPal. Secure & easy! 💳";
+    }
+
+    // Thank you messages
+    if (containsAny(lowerMessage, [
+        "thank", "thanks", "appreciate", "thank you", "thanks a lot", "cheers"
+    ])) {
+        return "You’re most welcome! 😃 Let me know if there’s anything else I can do for you.";
+    }
+
+    // bye messages
+    if (containsAny(lowerMessage, [
+        "bye", "goodbye", "see you", "see ya", "take care", "later", "talk to you later", "ciao", "farewell"
+    ])) {
+        return "Goodbye! 👋 It was nice chatting with you. Come back anytime if you need help with Dressify!";
+    }
+
+    // Polite no-understanding fallback
+    return "Hmm... I didn’t quite catch that. 🤔 Can you rephrase? You can ask me about how Dressify works, how to upload your photo, prices, delivery, returns, or even get fashion tips!";
+}
+
+// Helper function to check if message contains any keyword
+function containsAny(message, keywords) {
+    return keywords.some(keyword => message.includes(keyword));
 }
